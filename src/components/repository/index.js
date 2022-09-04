@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { getRepository } from "../../stores/actions/repository";
 import "./index.css";
 
 function Repository() {
+  const dispatch = useDispatch();
+  
   const [repositories, setRepositories] = useState([]);
 
   const getAllRepository = async () => {
-    const res = await axios.get("https://api.github.com/users/AhmadZaky19/repos")
-    setRepositories(res.data);
+    const res = await dispatch(getRepository())
+    setRepositories(res.value.data);
   };
   
   useEffect(() => {

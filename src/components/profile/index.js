@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { getProfile } from "../../stores/actions/profile";
 import "./index.css";
 
 function Profile() {
+  const dispatch = useDispatch();
+
   const [profile, setProfile] = useState({});
 
   const getProfileUserAPI = async () => {
-    const res = await axios.get("https://api.github.com/users/AhmadZaky19");
-    setProfile(res.data);
+    const res = await dispatch(getProfile())
+    setProfile(res.value.data);
   }
 
   useEffect(() => {
